@@ -18,7 +18,7 @@ var rAF = window.rAF = (function(callback) {
 		};
 })();
 
-require([/*'zepto',*/'xenui'], function init(/*Zep,*/xenui) {
+require([/*'zepto',*/'lib/xenui'], function init(/*Zep,*/xenui) {
 	console.log(xenui.VERSION);
 //	var root = this;
 	
@@ -36,7 +36,8 @@ require([/*'zepto',*/'xenui'], function init(/*Zep,*/xenui) {
 	
 	console.log('Setting up renderloop.');
 	rAF(function render(Δ) {
-		console.log(Δ);
+		/// Note:	Should only render /if/ there is a need to render!
+		/// FixME:	I am lazy as heck ;-)
 		view.render(ctx);
 		rAF(render);
 		});
