@@ -38,6 +38,7 @@ require([/*'zepto',*/'lib/xenui'], function init(/*Zep,*/xenui) {
 	rAF(function render(Δ) {
 		/// Note:	Should only render /if/ there is a need to render!
 		/// FixME:	I am lazy as heck ;-)
+		ctx.clearRect(0,0,500,500);
 		view.render(ctx);
 		rAF(render);
 		});

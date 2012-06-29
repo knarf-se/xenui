@@ -1,3 +1,5 @@
 define({
-	'layout':'Widgets..'
+	"type"	: "label",
+	"text"	: "Hello, XenUI!",
+	"xy"	: [42,37]
 });
