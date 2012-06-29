@@ -1,0 +1,20 @@
+
+{
+	"name": "XenUI",
+	"version": "0.0.0",
+	"description": "Thinkering around another way to do GUIs",
+	"main": "main.js",
+	"scripts": {
+		"test": "jasmine-node --matchall specs/",
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/knarf-se/xenui.git"
+	},
+	"keywords": [
+		"GUI"
+	],
+	"author": "Frank M. Eriksson http://knarf.se/",
+	"license": "zLib"
+}
