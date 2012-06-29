@@ -37,6 +37,12 @@ require [ "zepto", "cs!lib/xenui" ], init = (Zep, xenui) ->
 		view.render(ctx)
 		rAF(render)
 	)
+	window.setTimeout(()->
+		view.ui.click.add ()->
+			console.log 'CLICK!'
+		view.ui.click.addOnce ()->
+			alert 'CLICK!'
+	, 1337);
 
 	#!	TODO: Code up Event to Signal-translator..
 	console.log('EOM');

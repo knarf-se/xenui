@@ -1,5 +1,5 @@
 define({
-	"type"	: "label",
+	"type"	: "button",
 	"text"	: "Hello, XenUI!",
 	"xy"	: [42,37]
 });
