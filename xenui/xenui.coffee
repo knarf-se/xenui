@@ -2,15 +2,15 @@
 #	-----------------------------
 #	© 2012 Frank M. Eriksson
 
-define [ "zepto", "../../lib/signals" ], (Zep, Sig) ->
+define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 	XEN = VERSION: "0-WIP"
 	root = this
 	$ = root.Zepto or root.jQuery or root.ender
 	class View
-		constructor: (file) ->
-			$.extend this,
-				loaded:	false
-				dirty:	true
+		constructor: (file, ctx) ->
+			@loaded=	false
+			@dirty =	true
+			@Render=	new Render(ctx)
 
 			thiz = this
 			console.log "Constructing new view", file, this
@@ -23,7 +23,7 @@ define [ "zepto", "../../lib/signals" ], (Zep, Sig) ->
 		render: (ctx) ->
 			return unless @loaded
 			return unless @dirty
-			@ui.render ctx
+			@ui.render ctx, @Render
 
 		constructFrom: (data) ->
 			console.log "Constructing view from data"
@@ -89,13 +89,13 @@ define [ "zepto", "../../lib/signals" ], (Zep, Sig) ->
 			@hover	= new Signal()
 			@blur	= new Signal()
 			@click	= new Signal()
-			@colour	= 'salmon';
+			@state	= 'active';
 			@hover.add	()=>
-				@colour = 'skyblue'
+				@state = 'hover'
 			@blur.add	()=>
-				@colour = 'lightgray'
+				@state = ''
 			@click.add	()=>
-				@colour = 'limegreen'
+				@state = 'selected'
 			@hovering = false
 			$('#can').on('mousemove', (e)=>
 				x = e.offsetX
@@ -110,20 +110,16 @@ define [ "zepto", "../../lib/signals" ], (Zep, Sig) ->
 						@hovering = false
 			).on('mousedown', (e)=>
 				@clickjack = if(@hovering) then true else false
+				if(@hovering) then @state = 'selected'
 			).on('mouseup', (e)=>
 				if(@hovering&&@clickjack) then @click.dispatch()
+				if(@state is 'selected') then @state = 'active'
 			)
 		setXY: (x,y) ->
 			@label.setXY(x+@p,y+@p)
 			super(x,y)
-		render: (ctx,t) ->
-			ctx.beginPath();
-			ctx.rect(@x,@y,@w,24);
-			ctx.closePath();
-			ctx.fillStyle	= @colour
-			ctx.fill()
-			ctx.strokeStyle	= 'black'
-			ctx.stroke();
+		render: (ctx,Render) ->
+			Render.button(@x,@y,@w,24,@state)
 			@label.render(ctx)
 
 	$.extend XEN,
