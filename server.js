@@ -11,8 +11,8 @@ http.createServer(function ( req, resp ) {
 		if (exists) {
 			var stream = fs.createReadStream(fileName);
 			stream.on('error', function () {
-				req.writeHead(500);
-				req.end('An error occured ;-(');
+				resp.writeHead(500);
+				resp.end('An error occured ;-(');
 			});
 
 			resp.writeHead(200, { 'Content-Type': mimeType });

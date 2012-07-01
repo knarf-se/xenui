@@ -2,7 +2,7 @@
 #	-----------------------------
 #	© 2012 Frank M. Eriksson
 
-define [ "zepto", "lib/signals" ], (Zep, Sig) ->
+define [ "zepto", "../../lib/signals" ], (Zep, Sig) ->
 	XEN = VERSION: "0-WIP"
 	root = this
 	$ = root.Zepto or root.jQuery or root.ender

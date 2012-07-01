@@ -14,7 +14,7 @@ rAF = window.rAF = ((callback) ->
 		window.setTimeout(callback, 1000 / 60);
 )()
 
-require [ "zepto", "cs!lib/xenui" ], init = (Zep, xenui) ->
+require [ "zepto", "cs!../../lib/xenui" ], init = (Zep, xenui) ->
 	console.log(xenui.VERSION);
 	root = this
 
@@ -25,7 +25,7 @@ require [ "zepto", "cs!lib/xenui" ], init = (Zep, xenui) ->
 	ctx.background = "black"
 	ctx.fillRect(0, 0, 500, 500)
 
-	view = new xenui.View("view/main")
+	view = new xenui.View("view")
 
 	console.log "Setting up renderloop."
 	rAF(render = ( t ) ->
