@@ -49,8 +49,10 @@ define [ "zepto", "lib/signals" ], (Zep, Sig) ->
 		setXY: (@x,@y) ->
 			this
 
+
 	class Label extends Widget
 		constructor: (text) ->
+			super()
 			@text		= "Undefined label"
 			@font		= "14px sans-serif"
 			@strokeStyle= "green"
@@ -78,9 +80,11 @@ define [ "zepto", "lib/signals" ], (Zep, Sig) ->
 			ctx.font= @font
 			@width	= ctx.measureText(text).width
 
-	#	Should have have a Label, not extend it
-	class Button extends Label
+	class Button extends Widget
 		constructor: (text) ->
+			super()
+			@label = new Label(text)
+			@w = @label.width+7
 			Signal	= Sig.Signal
 			@hover	= new Signal()
 			@blur	= new Signal()
@@ -96,7 +100,7 @@ define [ "zepto", "lib/signals" ], (Zep, Sig) ->
 			$('#can').on('mousemove', (e)=>
 				x = e.offsetX
 				y = e.offsetY
-				if(x>=@x&&y>=@y&&x<=@x+@width&&y<@y+19)
+				if(x>=@x&&y>=@y&&x<=@x+@w&&y<@y+24)
 					if(!@hovering)
 						@hover.dispatch()
 					@hovering = true
@@ -109,16 +113,18 @@ define [ "zepto", "lib/signals" ], (Zep, Sig) ->
 			).on('mouseup', (e)=>
 				if(@hovering&&@clickjack) then @click.dispatch()
 			)
-			super(text)
+		setXY: (x,y) ->
+			@label.setXY(x+@p,y+@p)
+			super(x,y)
 		render: (ctx,t) ->
 			ctx.beginPath();
-			ctx.rect(@x,@y,@width,18);
+			ctx.rect(@x,@y,@w,24);
 			ctx.closePath();
 			ctx.fillStyle	= @colour
 			ctx.fill()
 			ctx.strokeStyle	= 'black'
 			ctx.stroke();
-			super(ctx)
+			@label.render(ctx)
 
 	$.extend XEN,
 		View: View
