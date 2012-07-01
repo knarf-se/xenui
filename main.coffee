@@ -1,6 +1,5 @@
 # XenUI (JS) Test
 # ---------------
-
 console.log('XenUI (JS) Test');
 
 requirejs.config paths:
@@ -27,7 +26,6 @@ require [ "zepto", "cs!lib/xenui" ], init = (Zep, xenui) ->
 	ctx.fillRect(0, 0, 500, 500)
 
 	view = new xenui.View("view/main")
-	console.log(view);
 
 	console.log "Setting up renderloop."
 	rAF(render = ( t ) ->
@@ -37,12 +35,6 @@ require [ "zepto", "cs!lib/xenui" ], init = (Zep, xenui) ->
 		view.render(ctx)
 		rAF(render)
 	)
-	window.setTimeout(()->
-		view.ui.click.add ()->
-			console.log 'CLICK!'
-		view.ui.click.addOnce ()->
-			alert 'CLICK!'
-	, 1337);
 
 	#!	TODO: Code up Event to Signal-translator..
 	console.log('EOM');
