@@ -4,27 +4,25 @@ var http	= require('http'),
 	port	= 1337;
 
 http.createServer(function ( req, resp ) {
-	var fileName = (req.url=='/')?'./index.html':'.'+req.url;
+	var nodeName = '.'+req.url;
 
-	fs.stat(fileName, function ( err, stats ) {
+	fs.stat(nodeName, function ( err, stats ) {
 		if (err === null && stats.isFile() ) {
-			streamFile(resp, fileName);
+			streamFile(resp, nodeName);
 		} else {
 			if (err === null && stats.isDirectory()) {
-				return ls(resp, fileName);
+				fileName = nodeName + 'index.html';
+				fs.stat(fileName, function ( err, stats ) {
+					if (err === null && stats.isFile() ) {
+						streamFile(resp, fileName);
+					} else {
+						return ls(resp, nodeName);
+					}
+				});
+			} else {
+				resp.writeHead(404);
+				resp.end('File Not Found');
 			};
-			fileName += 'index.html';
-			fs.stat(fileName, function ( err, stats ) {
-				if (err === null && stats.isFile() ) {
-					streamFile(resp, fileName);
-				} else {
-					if (err === null && stats.isDirectory()) {
-						return ls(resp, fileName);
-					};
-					resp.writeHead(404);
-					resp.end('File Not Found');
-				}
-			});
 		}
 	});
 }).listen(port);
@@ -54,18 +52,18 @@ function ls( out, dir ) {
 				'Directory</a></td></tr>');
 			for (var i = files.length - 1; i >= 0; i--) {
 				var fsnode = dir+files[i];
-				//	the first sin of node.js -- I know..
-				stats = fs.statSync(dir+files[i]);
-				if(err!==null)return console.log(err);
-				var bs = path.basename(files[i]);
-				console.log(fsnode);
-				if(stats.isDirectory()) bs += '/';
-				out.write('<tr><td><a href="'+bs+'">'+bs+'</a></td>');
-				if(stats.isDirectory()) {
-					out.write('<td> [Directory Entry] </td></tr>');
-				} else {
-					out.write('<td>'+getMime(files[i])+'</td></tr>');
-				}
+				try {
+					//	the first sin of node.js -- I know..
+					stats = fs.statSync(dir+files[i]);
+					var bs = path.basename(files[i]);
+					if(stats.isDirectory()) bs += '/';
+					out.write('<tr><td><a href="'+bs+'">'+bs+'</a></td>');
+					if(stats.isDirectory()) {
+						out.write('<td> [Directory Entry] </td></tr>');
+					} else {
+						out.write('<td>'+getMime(files[i])+'</td></tr>');
+					}
+				} catch( all ) {}
 			}
 			out.end('</table></body></html>');
 		} else {
@@ -77,13 +75,21 @@ function ls( out, dir ) {
 
 function getMime( file ) {
 	switch (path.extname(file)) {
-		case '.js':
-			return 'text/javascript';
+		case '.coffee':
+			return 'text/coffee-script';
 		case '.css':
 			return 'text/css';
 		case '.htm':
 		case '.html':
 			return 'text/html'
+		case '.js':
+			return 'text/javascript';
+		case '.json':
+			return 'text/json';
+		case '.md':
+			return 'text/markdown';
+		case '.yml':
+			return 'text/yaml';
 		default:
 			return 'application/octet-stream'
 	}
