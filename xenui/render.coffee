@@ -43,7 +43,8 @@ define ()->
 			ctx.fillStyle = @buildLinearGradient(11,37,11,64, @grad or @outset)
 			ctx.fill()
 
-		button: (x,y,w,h, state) ->
+		button: (region, state) ->
+			{x,y,w,h} = region
 			ctx = @ctx
 			@panel(x,y,w,h, switch state
 				when 'selected'

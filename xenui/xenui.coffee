@@ -39,16 +39,28 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 
 	class Widget
 		constructor: () ->
-			@x 	= 1
-			@y	= 1
-			@w	= 1
-			@h	= 1
+			@region = new Region()
 			@f	= "rgba(0,0,0,0)"
 			@c	= "black"
 			@p	= 3.5
 		setXY: (@x,@y) ->
+			@region.setXY @x,@y
 			this
 
+	class Region
+		constructor: () ->
+			#	global co-ordinates
+			@x 	= 1
+			@y	= 1
+			@w	= 1
+			@h	= 1
+		#	Check if region contains a point
+		contains: (x,y) ->
+			(x>=@x&&y>=@y&&x<=@x+@w&&y<@y+@h)
+		setXY: (@x,@y) ->
+			this
+		setWH: (@w,@h) ->
+			this
 
 	class Label extends Widget
 		constructor: (text) ->
@@ -79,12 +91,13 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 			ctx		= document.createElement("canvas").getContext("2d")
 			ctx.font= @font
 			@width	= ctx.measureText(text).width
+			@region.w = @width
 
 	class Button extends Widget
 		constructor: (text) ->
 			super()
 			@label = new Label(text)
-			@w = @label.width+7
+			@region.setWH @label.width+7, 24
 			Signal	= Sig.Signal
 			@hover	= new Signal()
 			@blur	= new Signal()
@@ -100,7 +113,7 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 			$('#can').on('mousemove', (e)=>
 				x = e.offsetX
 				y = e.offsetY
-				if(x>=@x&&y>=@y&&x<=@x+@w&&y<@y+24)
+				if(@region.contains(x,y))
 					if(!@hovering)
 						@hover.dispatch()
 					@hovering = true
@@ -119,7 +132,7 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 			@label.setXY(x+@p,y+@p)
 			super(x,y)
 		render: (ctx,Render) ->
-			Render.button(@x,@y,@w,24,@state)
+			Render.button(@region,@state)
 			@label.render(ctx)
 
 	$.extend XEN,
