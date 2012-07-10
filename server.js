@@ -5,21 +5,20 @@ var http	= require('http'),
 
 http.createServer(function ( req, resp ) {
 	var fileName = (req.url=='/')?'./index.html':'.'+req.url;
-	var mimeType = getMime(fileName);
 
-	fs.exists(fileName, function( exists ) {
-		if (exists) {
-			var stream = fs.createReadStream(fileName);
-			stream.on('error', function () {
-				resp.writeHead(500);
-				resp.end('An error occured ;-(');
-			});
-
-			resp.writeHead(200, { 'Content-Type': mimeType });
-			stream.pipe(resp);
+	fs.stat(fileName, function ( err, stats ) {
+		if (err === null && stats.isFile() ) {
+			streamFile(resp, fileName);
 		} else {
-			resp.writeHead(404);
-			resp.end();
+			fileName += 'index.html';
+			fs.stat(fileName, function ( err, stats ) {
+				if (err === null && stats.isFile() ) {
+					streamFile(resp, fileName);
+				} else {
+					resp.writeHead(404);
+					resp.end('File Not Found');
+				}
+			});
 		}
 	});
 }).listen(port);
@@ -27,15 +26,28 @@ http.createServer(function ( req, resp ) {
 console.log('Local server started, access at: http://ulh.us:'+port+'/');
 console.log('Abort server with Ctrl+C');
 
+function streamFile( dest, fileName ) {
+	var mimeType = getMime(fileName);
+	var stream = fs.createReadStream(fileName);
+	stream.on('error', function () {
+		dest.writeHead(500);
+		dest.end('An error occured ;-(');
+	});
+
+	dest.writeHead(200, { 'Content-Type': mimeType });
+	stream.pipe(dest);
+}
+
 function getMime( file ) {
 	switch (path.extname(file)) {
 		case '.js':
 			return 'text/javascript';
-			break;
 		case '.css':
 			return 'text/css';
-			break;
-		default:
+		case '.htm':
+		case '.html':
 			return 'text/html'
+		default:
+			return 'application/octet-stream'
 	}
 }
