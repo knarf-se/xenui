@@ -40,6 +40,7 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 	class Widget
 		constructor: () ->
 			@region = new Region()
+			#	ToDo:	Split out style information
 			@f	= "rgba(0,0,0,0)"
 			@c	= "black"
 			@p	= 3.5
@@ -87,10 +88,15 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 			super()
 			@label = new Label(text)
 			@region.setWH @label.width+7, 24
+			#	ToDo:	Move these signal thingies out of the button class, as
+			#		they are NOT specific for just buttons. It should probably
+			#		go into the region class ("active region" sounds nice 8-)
 			Signal	= Sig.Signal
 			@hover	= new Signal()
 			@blur	= new Signal()
 			@click	= new Signal()
+			#	FixMe:	There's a bug here, a widget can't be both selected and
+			#		have the hovering state at the same time right now.
 			@state	= 'active';
 			@hover.add	()=>
 				@state = 'hover'

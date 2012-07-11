@@ -1,7 +1,6 @@
 define ()->
 
-
-# SEWR -- Simple Engine for Wigetet Rendering
+#	SEWR -- Simple Engine for Widget Rendering
 	rAF = window.rAF = ((callback) ->
 		window.requestAnimationFrame		||
 		window.webkitRequestAnimationFrame	||
@@ -13,6 +12,8 @@ define ()->
 	class SEWR
 		constructor: (ctx) ->
 			@ctx	= if ctx.getContext then ctx.getContext('2d') else ctx
+			#	This looks ugly..
+			#	ToDo:	Load styledata from file
 			@darker	= [[0,'#999'],[1,'#000']]
 			@outset	= [[.0, "#fff"],[.05, "#eee"],[.1, "#fff"],[.5, "#ccc"],
 				[.5, "#aaa"],[.90, "#888"],[1, "#aaa"]]
@@ -80,6 +81,7 @@ define ()->
 			ctx.beginPath()
 			ctx.rect(x,y+h*.78,w,h/7.6);
 			ctx.closePath()
+			#	This style data does no belong here
 			ctx.fillStyle = @buildRadialGradient(x+w/2,y+h/2,5, x+w/2,y+h/2,77, switch widget.state
 				when 'selected'
 					[[0,'#1ea'],[.4,"rgba(1,97,224,.3)"],[1,"rgba(1,98,159,0)"]]
