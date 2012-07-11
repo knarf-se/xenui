@@ -20,6 +20,15 @@ define ()->
 				[.9, "#fff"],[.95, "#eee"],[1, "#fff"]]
 			@flat	= [[.0, "#fff"],[.1, "#eee"],[.95, "#eee"],[1, "#ccc"]]
 
+		render: (widget) ->
+			switch widget.constructor.name
+				when 'Button'
+					@button widget
+				when 'Label'
+					@button widget
+				else
+					return
+
 		colourizeGradient: (gradient, colourList) ->
 			gradient.addColorStop(stop, colour) for [stop, colour] in colourList
 			return gradient
@@ -32,6 +41,20 @@ define ()->
 			gradient = @ctx.createRadialGradient(x0,y0,r0,x1,y1,r1)
 			@colourizeGradient(gradient, colourList)
 
+		label: (label) ->
+			ctx = @ctx
+			ctx.save()
+			ctx.font = label.font
+			{text,fill,outline,fillStyle,strokeStyle} = label
+			{x,y,w,h} = label.region
+			if fill
+				ctx.fillStyle = fillStyle
+				ctx.fillText text, x, y+14
+			if outline
+				ctx.strokeStyle = strokeStyle
+				ctx.strokeText text, x, y+14
+			ctx.restore()
+
 		panel: (x,y,w,h, @grad) ->
 			ctx = @ctx
 			ctx.beginPath()
@@ -43,10 +66,10 @@ define ()->
 			ctx.fillStyle = @buildLinearGradient(11,37,11,64, @grad or @outset)
 			ctx.fill()
 
-		button: (region, state) ->
-			{x,y,w,h} = region
+		button: (widget) ->
+			{x,y,w,h} = widget.region
 			ctx = @ctx
-			@panel(x,y,w,h, switch state
+			@panel(x,y,w,h, switch widget.state
 				when 'selected'
 					@inset
 				when 'hover'
@@ -57,7 +80,7 @@ define ()->
 			ctx.beginPath()
 			ctx.rect(x,y+h*.78,w,h/7.6);
 			ctx.closePath()
-			ctx.fillStyle = @buildRadialGradient(x+w/2,y+h/2,5, x+w/2,y+h/2,77, switch state
+			ctx.fillStyle = @buildRadialGradient(x+w/2,y+h/2,5, x+w/2,y+h/2,77, switch widget.state
 				when 'selected'
 					[[0,'#1ea'],[.4,"rgba(1,97,224,.3)"],[1,"rgba(1,98,159,0)"]]
 				when 'hover'
@@ -68,3 +91,4 @@ define ()->
 					[[0,"rgba(0,0,0,0)"]]
 			)
 			ctx.fill()
+			@label(widget.label)

@@ -8,9 +8,9 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 	$ = root.Zepto or root.jQuery or root.ender
 	class View
 		constructor: (file, ctx) ->
-			@loaded=	false
-			@dirty =	true
-			@Render=	new Render(ctx)
+			@loaded		=	false
+			@dirty 		=	true
+			@Renderer	=	new Render(ctx)
 
 			thiz = this
 			console.log "Constructing new view", file, this
@@ -23,7 +23,7 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 		render: (ctx) ->
 			return unless @loaded
 			return unless @dirty
-			@ui.render ctx, @Render
+			@Renderer.render(@ui)
 
 		constructFrom: (data) ->
 			console.log "Constructing view from data"
@@ -43,8 +43,8 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 			@f	= "rgba(0,0,0,0)"
 			@c	= "black"
 			@p	= 3.5
-		setXY: (@x,@y) ->
-			@region.setXY @x,@y
+		setXY: (x,y) ->
+			@region.setXY x,y
 			this
 
 	class Region
@@ -74,17 +74,6 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 			@fill		= true
 			@setText text
 			this
-
-		render: (ctx) ->
-			ctx.save()
-			ctx.font = @font
-			if @fill
-				ctx.fillStyle = @fillStyle
-				ctx.fillText @text, @x, @y+14
-			if @outline
-				ctx.strokeStyle = @strokeStyle
-				ctx.strokeText @text, @x, @y+14
-			ctx.restore()
 
 		setText: (text) ->
 			@text	= text
@@ -131,9 +120,6 @@ define [ "zepto", "./signals", "cs!./render" ], (Zep, Sig, Render) ->
 		setXY: (x,y) ->
 			@label.setXY(x+@p,y+@p)
 			super(x,y)
-		render: (ctx,Render) ->
-			Render.button(@region,@state)
-			@label.render(ctx)
 
 	$.extend XEN,
 		View: View
