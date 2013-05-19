@@ -1,0 +1,13 @@
+#!/bin/bash
+UNAME=`uname`
+
+if [ "$UNAME" == "Linux" ]; then
+	premake4 clean
+	premake4 gmake
+
+	make config=debug
+fi
+
+if [ "$UNAME" == "Darwin" ]; then
+	echo "MachOS not yet supported! :'("
+fi
