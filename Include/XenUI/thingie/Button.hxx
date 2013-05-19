@@ -5,7 +5,6 @@ namespace xen {
 	public:
 		Button();
 		~Button();
-	
-		/* data */
+
 	};
 }
