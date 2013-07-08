@@ -17,4 +17,5 @@ configuration "Debug"
 	flags { "Symbols" }
 
 project "XenUI"
-	files { "./Source/**.*", "./Example/**.*" }
+	links { "xcb" }
+	files { "./Source/**.*", "./Example/**.*", "./Adaptor/XCB/**.*" }

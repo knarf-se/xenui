@@ -2,10 +2,10 @@
 #include <XenUI/Thingie.hxx>
 
 namespace xen {
-	class Button : public Thingie {
+	class Label : public Thingie {
 	public:
-		Button();
-		~Button();
+		Label();
+		~Label();
 
 	};
 }
