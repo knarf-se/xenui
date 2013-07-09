@@ -1,10 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Make bash script exit when something fails
+# Ie it returns a Non-Zero exit-value.
+set -e
+
 UNAME=`uname`
 
 if [ "$UNAME" == "Linux" ]; then
-	premake4 clean
 	premake4 gmake
 
+	make clean
 	make config=debug
 fi
 
