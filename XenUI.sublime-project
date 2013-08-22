@@ -1,0 +1,26 @@
+{	"name": "XenUI",
+	"folders": [
+		{	"path": "./",
+			"follow_symlinks": true,
+			"folder_exclude_patterns":["obj","bin","Samples"],
+			"file_exclude_patterns": ["Makefile","XenUI.make",".tags*"]
+		},
+		{	"path": "./Samples"
+		}
+	],
+	"settings": {
+		"tab_size": 4,
+		"translate_tabs_to_spaces": false,
+		"trim_trailing_white_space_on_save": true,
+		// ensure line endings is linux style (even when on Windows)
+		"default_line_ending": "LF"
+	},
+	"build_systems": [
+		{	"name": "premake",
+			"shell_cmd": "./build"
+		},
+		{	"name": "tup",
+			"shell_cmd": "tup"
+		}
+	]
+}
