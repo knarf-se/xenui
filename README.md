@@ -13,6 +13,14 @@ I want this to be a cross-platform library, but after looking into that, I see t
 __Status__: Currently quite unusable :) Check back later!
 Patches are **always** welcome.
 
+Cool Ideas Worth Exploring
+--------------------------
+I would like it if I could pull of having some kind of system where you just defines what possible actions/events that are aviable when and how in your code, and not touching any actual on-screen GUI code. I mean that the actual looks and function of the GUI-frontend should be specified in a file that is designed by a person, who need not even know how to program at all. Just know how to make a **beautiful** and **useable** GUI ;-)
+
+This would be something like a MVC (Model–view–controller) style thing. But the “View” could possibly be replaced at runtime, which could be useful if you move the window to a smaller screen or you just want a more compact layout. Or whatever reason you can imagine.
+
+I'm not entirely sure yet how I will go about tackling this, but it will problably prove to be an interesting challange.
+
 Build & Configuration
 ---------------------
 For the most part, I tries to keep the configuration automagically :) Right now it only checks to see if you have **[XCB](http://xcb.freedesktop.org/)** installed or not.
