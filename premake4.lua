@@ -17,7 +17,7 @@ configuration "Debug"
 	flags { "Symbols" }
 
 project "XenUI"
-	files { "./Source/**.*", "./Example/**.*" }
+	files { "./Source/**.*", "./Samples/dummy/**.*" }
 	--[[ Doesn't work?
 	if os.findlib("xcb") ~= nil then
 	]]--
