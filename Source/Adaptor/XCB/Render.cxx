@@ -2,7 +2,6 @@
 #include "../Render.hxx"
 #include <xcb/xcb.h>
 
-/*
 namespace xen {
 	xcb_connection_t*	con;
 	xcb_screen_t*		scr;
@@ -13,7 +12,7 @@ namespace xen {
 	Render::~Render() {
 		xcb_disconnect(con);
 	}
-	void Render::drawRect(const Rect &re, const Style &sty) {
+	void Render::drawRect(const Rect &re) {
 		xcb_rectangle_t rect[] = {
 			{re.x, re.y, re.w, re.h}, NULL
 		};

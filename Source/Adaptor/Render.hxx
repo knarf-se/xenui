@@ -1,6 +1,5 @@
 
 #include <xui/Rect.hxx>
-#include <xui/Style.hxx>
 
 namespace xen {
 	class Render {
@@ -8,7 +7,7 @@ namespace xen {
 		Render();
 		~Render();
 	
-		void drawRect(const Rect &re, const Style &sty);
+		void drawRect(const Rect &re);
 		/* etc.. */
 	};
 }

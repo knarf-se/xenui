@@ -25,7 +25,6 @@ project "XenUI"
 		print("\27[32mFound \27[36mXCB\27[0m")
 		defines { "HAVE_XCB" }
 		links { "xcb" }
-		files { "./Adaptor/XCB/**.*" }
 	else
 	--[[ Uncomment when SFML2 target is aviable
 	if os.findlib("sfml-graphics") then
