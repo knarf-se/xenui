@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+echo "Select window to introspect"
+wid=$(xwininfo  |grep 'Window id:' |cut -d" " -f4)
+pid=$(xprop -id "$wid" |grep "^_NET_WM_PID" | cut -d" " -f3)
+exec ./introspect $pid
