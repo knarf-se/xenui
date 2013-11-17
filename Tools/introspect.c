@@ -10,8 +10,6 @@ void print_usage() {
 	puts("Usage:\n\tintrospect PID\n");
 }
 
-#pragma startup print_usage
-
 int main(int argc, char const *argv[]) {
 	if(argc<2) {
 		print_usage();
@@ -46,6 +44,14 @@ int main(int argc, char const *argv[]) {
 	}
 
 	//	Todo: Put actual introspection code here
+
+	//	Read =Variables
+
+	//	Read →Actions
+
+	//	Sort
+
+	//	Pretty-print
 
 	return 0;
 }
