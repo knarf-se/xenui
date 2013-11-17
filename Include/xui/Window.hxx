@@ -1,5 +1,5 @@
 #pragma once
-#include <XenUI/Container.hxx>
+#include <xui/Container.hxx>
 
 namespace xen {
 	class Window : public Container {

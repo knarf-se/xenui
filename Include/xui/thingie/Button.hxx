@@ -1,5 +1,5 @@
 #pragma once
-#include <XenUI/Thingie.hxx>
+#include <xui/Thingie.hxx>
 
 namespace xen {
 	class Button : public Thingie {

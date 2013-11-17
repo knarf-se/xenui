@@ -1,6 +1,6 @@
 
-#include <XenUI/Rect.hxx>
-#include <XenUI/Style.hxx>
+#include <xui/Rect.hxx>
+#include <xui/Style.hxx>
 
 namespace xen {
 	class Render {

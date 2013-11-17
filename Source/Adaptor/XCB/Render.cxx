@@ -1,7 +1,8 @@
 
-#include <XenUI/adaptor/Render.hxx>
+#include "../Render.hxx"
 #include <xcb/xcb.h>
 
+/*
 namespace xen {
 	xcb_connection_t*	con;
 	xcb_screen_t*		scr;
@@ -16,6 +17,6 @@ namespace xen {
 		xcb_rectangle_t rect[] = {
 			{re.x, re.y, re.w, re.h}, NULL
 		};
-		xcb_poly_rectangle (con, NULL/*win*/, 0, 1, rect);
+		xcb_poly_rectangle (con, NULL, 0, 1, rect);
 	}
 }

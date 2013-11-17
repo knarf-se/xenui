@@ -1,4 +1,4 @@
 
-#include <XenUI/thingie/Button.hxx>
-#include <XenUI/thingie/Label.hxx>
-#include <XenUI/Window.hxx>
+#include <xui/thingie/Button.hxx>
+#include <xui/thingie/Label.hxx>
+#include <xui/Window.hxx>

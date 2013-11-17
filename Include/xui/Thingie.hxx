@@ -1,6 +1,6 @@
 #pragma once
-#include <XenUI/Event.hxx>
-#include <XenUI/Rect.hxx>
+#include <xui/Event.hxx>
+#include <xui/Rect.hxx>
 
 namespace xen {
 	class Thingie {
