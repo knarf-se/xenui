@@ -18,14 +18,19 @@ function findlib(name)
 	end
 end
 
+--	Choose what “adaptor” to use (Windowing backend)
 adaptor = "none"
 for lib in pairs(adaptors) do
 	local found = findlib(lib)
 	if found then adaptor = lib end
 end
+
 if adaptor == "none" then
 	print("No aviable configurations, \27[34mTERMINATING\27[0m...")
 	os.exit(1)
 else
 	print("\27[32mUsing \27[36m"..adaptor.."\27[0m")
 end
+
+--	Moar stuff
+
