@@ -1,6 +1,10 @@
 
 dofile "Tools/configure.lua"
 
+--	ugly hack to use clang
+premake.gcc.cc	= 'clang'
+premake.gcc.cxx	= 'clang++'
+
 solution "XenUI"
 	language "C++"
 	targetdir ( "./bin" )
