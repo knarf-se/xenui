@@ -1,7 +1,7 @@
 *.sublime-workspace
-XenUI.make
 Makefile
 .tags*
+*.make
 bin/
 obj/
 .tup

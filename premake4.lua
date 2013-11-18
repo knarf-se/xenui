@@ -5,12 +5,9 @@ solution "XenUI"
 	language "C++"
 	targetdir ( "./bin" )
 	includedirs { "./Include/" }
-
 	configurations { "Release", "Debug" }
-	if found_xcb == true then
-		print("\27[32mUsing \27[36mXCB\27[0m")
-		defines { "USES_XCB" }
-	end
+	if adaptor == 'xcb'  then defines { "USES_XCB" }  end
+	if adaptor == 'sfml' then defines { "USES_SFML" } end
 
 configuration "Release"
 	defines { "NDEBUG" }
@@ -20,24 +17,25 @@ configuration "Debug"
 	defines { "_DEBUG" }
 	flags { "Symbols" }
 
-project "XenUI"
-	 kind "SharedLib"
-	files { "./Source/Core/**.*" }
-	--[[ Doesn't work?
-	if os.findlib("xcb") ~= nil then
-	]]--
-	if found_xcb then
-		links { "xcb" }
-		files { "./Source/XCB/**.*" }
-	end
-	--[[ Uncomment when SFML2 target is aviable
-	if os.findlib("sfml-graphics") then
-		print("Found SFML2")
-		defines { "HAVE_SFML2" }
-		links { "sfml-graphics" }
-		files { "./Adaptor/SFML2/**.*" }
-	]]--
+--	Libraries
+project "adaptor"
+	kind "StaticLib"
+	if adaptor == 'xcb'		then files "./Source/XCB/**.*"	 end
+	if adaptor == 'sfml'	then files "./Source/SFML2/**.*" end
 
+project "XenUI"
+	kind "SharedLib"
+	files { "./Source/Core/**.*" }
+	links { "adaptor" }
+
+--	Tools
+project "introspect"
+	kind "ConsoleApp"
+	links "XenUI"
+	files { "./Tools/introspect.c" }
+	postbuildcommands { "cp Tools/xintrospect bin/xintrospect" }
+
+--	Samples
 project "Dummy"
 	kind "ConsoleApp"
 	links "XenUI"
