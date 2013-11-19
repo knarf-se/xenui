@@ -1,12 +1,31 @@
 {	"name": "XenUI",
 	"folders": [
-		{	"path": "./",
+		{	"name": "╷Project Root",
+			"path": "./",
 			"follow_symlinks": true,
-			"folder_exclude_patterns":["obj","bin","Samples"],
-			"file_exclude_patterns": ["Makefile","XenUI.make",".tags*"]
+			"folder_exclude_patterns":["*"],
+			"file_exclude_patterns": ["Makefile","*.make",".tags*"]
 		},
-		{	"path": "./Samples"
-		}
+		{
+			"name": "├╴Documentation",
+			"path": "./Docs/",
+			"folder_exclude_patterns": ["html"]
+		},
+		{	"path": "./Samples/",
+			"name": "├╴Examples"
+		},
+		{
+			"name": "├╴Headers",
+			"path": "./Include/xui/"
+		},
+		{
+			"name": "├╴Source",
+			"path": "./Source/"
+		},
+		{
+			"name": "╰╴Tools",
+			"path": "./Tools"
+		},
 	],
 	"settings": {
 		"tab_size": 4,
