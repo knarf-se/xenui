@@ -1,0 +1,2 @@
+
+os.execute('./cw-test')
