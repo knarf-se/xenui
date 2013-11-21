@@ -33,4 +33,7 @@ else
 end
 
 --	Moar stuff
+function tuprule(inputs, command, outputs)
+	return ': '..inputs..' |> '..command..' |> '..outputs..'\n'
+end
 
