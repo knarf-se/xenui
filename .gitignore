@@ -1,5 +1,6 @@
 *.sublime-workspace
 XenUI.make
+Docs/html
 Makefile
 .tags*
 bin/

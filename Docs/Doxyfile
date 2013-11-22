@@ -1,0 +1,69 @@
+# Project configuration
+# =====================
+PROJECT_NAME			=	"XenUI"
+PROJECT_NUMBER			=
+PROJECT_BRIEF			=	"Experimental GUI system"
+PROJECT_LOGO			=	xenui-logo.png
+FULL_PATH_NAMES			=	YES
+QT_AUTOBRIEF			=	YES
+SEPARATE_MEMBER_PAGES	=	NO
+STRIP_FROM_INC_PATH		=	../include
+STRIP_FROM_PATH			=	../
+TAB_SIZE				=	4
+TYPEDEF_HIDES_STRUCT	=	YES
+
+# ------- --- -------
+# Build configuration
+# ===================
+CASE_SENSE_NAMES		=	YES
+EXTRACT_ALL				=	YES
+EXTRACT_ANON_NSPACES	=	NO
+EXTRACT_LOCAL_CLASSES	=	YES
+EXTRACT_PRIVATE			=	YES
+EXTRACT_STATIC			=	YES
+GENERATE_TODOLIST		=	YES
+INTERNAL_DOCS			=	YES
+SORT_MEMBER_DOCS		=	YES
+SORT_MEMBERS_CTORS_1ST	=	YES
+FILE_VERSION_FILTER		=
+#?	git describe --always --dirty
+
+# ------- --- -------
+# Input configuration
+# ===================
+INPUT					=	../
+RECURSIVE				=	YES
+
+# ------- ---- -------
+# Output configuration
+# ====================
+ALPHABETICAL_INDEX		=	YES
+GENERATE_HTMLHELP		=	NO
+GENERATE_LATEX			=	NO
+HTML_ALIGN_MEMBERS		=	YES
+HTML_COLORSTYLE_HUE		=	152
+HTML_COLORSTYLE_SAT		=	128
+HTML_TIMESTAMP			=	NO
+
+# ------- - -------
+# dot configuration
+# =================
+CALL_GRAPH				=	YES
+CALLER_GRAPH			=	YES
+CLASS_DIAGRAMS			=	YES
+CLASS_GRAPH				=	YES			#?
+COLLABORATION_GRAPH		=	YES
+DIRECTORY_GRAPH			=	YES
+DOT_FONTNAME			=	FreeSans
+DOT_FONTSIZE			=	11
+DOT_IMAGE_FORMAT		=	png
+DOT_MULTI_TARGETS		=	YES
+DOT_TRANSPARENT			=	YES
+GRAPHICAL_HIERARCHY		=	YES
+GROUP_GRAPHS			=	YES
+HAVE_DOT				=	YES
+INCLUDE_GRAPH			=	YES
+INCLUDED_BY_GRAPH		=	YES
+
+# =======================
+SEARCHENGINE			=	NO
