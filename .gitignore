@@ -1,5 +1,6 @@
 *.sublime-workspace
 XenUI.make
+External/
 Makefile
 .tags*
 bin/
