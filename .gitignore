@@ -1,4 +1,6 @@
-*.sublime-workspace
+*.sublime-*
+XenUI.make
+External/
 Makefile
 .tags*
 *.make
