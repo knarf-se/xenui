@@ -1,6 +1,7 @@
 *.sublime-*
 XenUI.make
 External/
+Docs/html
 Makefile
 .tags*
 *.make
